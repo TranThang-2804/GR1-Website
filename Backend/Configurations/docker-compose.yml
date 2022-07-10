@@ -1,0 +1,9 @@
+version: '3.6'
+
+services:
+  mydatabase:
+    image: mydb:current
+    ports: 
+      - "3360:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mysql2": "^2.3.3"
+  },
+
+  "scripts": {
+    "createdb": "sudo bash ./Configurations/Scripts/buildDb",
+    "extractdb": "sudo bash ./Configurations/Scripts/extractDb"
+  }
+}

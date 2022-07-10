@@ -1,0 +1,12 @@
+#!/bin/bash
+docker exec -it configurations_mydatabase_1 bash -c "
+    mysqldump -u root -p mydb > /tmp/database.sql"
+    
+echo "Starting copy to the host ..."
+
+docker cp configurations_mydatabase_1:/tmp/database.sql ./Configurations/Database
+
+echo "Finished copy to host ..."
+
+echo "Now the database.sql stored in the folder /Configuration/Database/database.sql is now updated \
+as inside the local mysql"

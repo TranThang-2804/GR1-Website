@@ -1,0 +1,19 @@
+#!/bin/bash
+
+sudo echo 'DROP DATABASE IF EXISTS mydb;
+    CREATE DATABASE mydb;
+    USE mydb;' | cat - ./Configurations/Database/database.sql > temp && mv temp ./Configurations/Database/database.sql
+
+echo "Building image"
+sudo sh ./Configurations/Scripts/buildimage
+
+echo "Deploying container"
+docker-compose -f Configurations/docker-compose.yml up -d
+
+echo "Import database ..."
+
+# docker exec -it configurations_mydatabase_1 bash -c "
+#     mysql -u root -p" -c "create database mydb"
+
+# docker exec -it configurations_mydatabase_1 bash -c "
+#     mysql -u root -p mydb < /tmp/database.sql"
