@@ -2,6 +2,6 @@
 
 ## Contribution
 
-@quocthangK64 frontend
+@quocthangK64
 
-@TranThang-2804 backend
+@TranThang-2804
