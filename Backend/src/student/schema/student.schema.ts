@@ -8,10 +8,10 @@ export class Student {
     @Column()
     firstName : string;
 
-    @Column()
+    @Column({nullable: true})
     lastName : string;
 
-    @Column()
+    @Column({nullable: true})
     address : string;
 
     @Column()
@@ -19,4 +19,13 @@ export class Student {
 
     @Column()
     highSchool : string;
+
+    @Column({type: 'decimal', precision: 3, scale: 1})
+    mathScore : number;
+
+    @Column({type: 'decimal', precision: 3, scale: 1})
+    literatureScore : number;
+    
+    @Column({type: 'decimal', precision: 3, scale: 1})
+    englishScore : number;
 }
