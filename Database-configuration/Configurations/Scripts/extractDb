@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Please enter password for Root User of mysql server"
 docker exec -it configurations_mydatabase_1 bash -c "
     mysqldump -u root -p mydb > /tmp/database.sql"
     

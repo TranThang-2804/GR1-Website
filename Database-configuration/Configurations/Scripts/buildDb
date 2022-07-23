@@ -11,6 +11,8 @@ echo "Deploying container"
 docker-compose -f Configurations/docker-compose.yml up -d
 
 echo "Import database ..."
+echo "Import Complete"
+echo "Now the database container is up and running"
 
 # docker exec -it configurations_mydatabase_1 bash -c "
 #     mysql -u root -p" -c "create database mydb"
