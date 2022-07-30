@@ -1,24 +1,37 @@
 import {Grid, Box, Typography, Divider, Button} from "@mui/material";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
+
+const typoFont = {
+  fontFamily: "san-arif",
+}
+
+const fieldTypoStyle = {
+  ...typoFont,
+  color: "rgb(136, 136, 136)",
+  fontSize: 16,
+  fontWeight: "bold"
+}
+
+const valueTypoStyle = {
+  ...typoFont,
+  color: "black",
+  fontSize: 16,
+  fontWeight: "medium"
+}
+
+const rowStyle = {
+  my: 1
+}
+
 
 const GradeTable = (props) => {
   const finalScore = parseFloat(props.studentInfo.mathScore) + parseFloat(props.studentInfo.englishScore) + parseFloat(props.studentInfo.literatureScore); 
 
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      fontSize: 14,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
+  const columnsWidth = [2.5, 2.5, 2.5, 4.5]
+
 
   return(
     <Grid item xs={12}>
@@ -27,66 +40,60 @@ const GradeTable = (props) => {
           my: 5
         }}
         >
-          <TableContainer component={Paper} sx={{background: "#ffddcc"}}>
-            <Table sx={{
-                width: '100px', 
-                minWidth: 200,
-              }} size="small" align="center">
-              <TableHead sx={{}}>
-                <TableRow>
-                  <StyledTableCell align="center">Math</StyledTableCell>
-                  <StyledTableCell align="center">Literature</StyledTableCell>
-                  <StyledTableCell align="center">English</StyledTableCell>
-                  <StyledTableCell align="center">Final score</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                  <TableRow
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  >
-                    <StyledTableCell align="center">{props.studentInfo.mathScore}</StyledTableCell>
-                    <StyledTableCell align="center">{props.studentInfo.literatureScore}</StyledTableCell>
-                    <StyledTableCell align="center">{props.studentInfo.englishScore}</StyledTableCell>
-                    <StyledTableCell align="center">{finalScore}</StyledTableCell>
-                  </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <Grid component={Paper} container sx={{background: "#ffddcc"}}>
+              <Grid container item xs={12} sx={{py:2}}>
+                <Grid item xs={columnsWidth[0]} align="center">
+                  <Typography sx={{...typoFont}}>Math</Typography>
+                </Grid>
+                <Grid item xs={columnsWidth[1]} align="center">
+                  <Typography sx={{...typoFont}}>Literature</Typography>
+                </Grid>
+                <Grid item xs={columnsWidth[2]} align="center">
+                  <Typography sx={{...typoFont}}>English</Typography>
+                </Grid>
+                <Grid item xs={columnsWidth[3]} align="center">
+                  <Typography sx={{...typoFont}}>Final score</Typography>
+                </Grid>
+              </Grid>
+              <Grid item xs={12}>
+                <Divider sx={{mx:2}}/>
+              </Grid>
+              <Grid container item xs={12} sx={{py: 1}}>
+                <Grid item xs={columnsWidth[0]} align="center">
+                  <Typography sx={{...typoFont}}>{props.studentInfo.mathScore}</Typography>
+                </Grid>
+                <Grid item xs={columnsWidth[1]} align="center">
+                  <Typography sx={{...typoFont}}>{props.studentInfo.literatureScore}</Typography>
+                </Grid>
+                <Grid item xs={columnsWidth[2]} align="center">
+                  <Typography sx={{...typoFont}}>{props.studentInfo.englishScore}</Typography>
+                </Grid>
+                <Grid item xs={columnsWidth[3]} align="center">
+                  <Typography sx={{...typoFont}}>{finalScore}</Typography>
+                </Grid>
+              </Grid>
+          </Grid>
       </Box>
     </Grid>
   );
 }
 
 function StudentInfo(props) {
-  const typoFont = {
-    fontFamily: "san-arif",
-  }
-
-  const fieldTypoStyle = {
-    ...typoFont,
-    color: "rgb(136, 136, 136)",
-    fontSize: 16,
-    fontWeight: "bold"
-  }
-
-  const valueTypoStyle = {
-    ...typoFont,
-    color: "black",
-    fontSize: 16,
-    fontWeight: "medium"
-  }
-
-  const rowStyle = {
-    my: 1
-  }
+  const dob = new Date(props.studentInfo.dob)
+  const yyyy = dob.getFullYear();
+  let mm = dob.getMonth() + 1; // Months start at 0!
+  let dd = dob.getDate();
+  if (dd < 10) dd = '0' + dd;
+  if (mm < 10) mm = '0' + mm;
+  const formattedDob = dd + '/' + mm + '/' + yyyy;
 
   return(
     <Box sx={{ 
         flexGrow: 1, 
         p: 2,
         background: 'rgb(242, 242, 242)',
-        width: '350px',
-        maxWidth: '700px', 
+        minWidth: '350px',
+        maxWidth: '400px', 
       }}>
       <Grid container>
         <Grid item xs={12}>
@@ -104,7 +111,10 @@ function StudentInfo(props) {
         </Grid>
 
         <Grid item xs={12}>
-          <Box>
+          <Box sx={{
+              display: "flex",
+              justifyContent: "center"}}
+            >
             <Typography sx={{
               ...typoFont,
               color: "black", 
@@ -143,7 +153,7 @@ function StudentInfo(props) {
             <Typography sx = {{...fieldTypoStyle}}>DOB</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography sx = {{...valueTypoStyle}}>{props.studentInfo.dob}</Typography>
+            <Typography sx = {{...valueTypoStyle}}>{formattedDob}</Typography>
           </Grid>    
         </Grid>
 
@@ -169,10 +179,14 @@ function StudentInfo(props) {
         <Grid item xs={12}>
           <Box sx={{
             display: "flex",
-            justifyContent: "space-around"
+            justifyContent: "center"
           }}>
-            <Button>Edit</Button>
-            <Button>Delete</Button>
+            <Button variant="contained" startIcon={<EditIcon />} sx={{mx:1}}>
+              <Typography sx={{...typoFont, fontSize: 12}}>Edit</Typography>
+            </Button>
+            <Button color="error" variant="contained" startIcon={<DeleteIcon />} sx={{mx:1, backgroud:"red", color:"white"}} >
+              <Typography sx={{...typoFont, fontSize: 12}}>Delete</Typography>
+            </Button>
           </Box>
         </Grid>
       </Grid>
