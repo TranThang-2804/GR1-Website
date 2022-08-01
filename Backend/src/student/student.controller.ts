@@ -3,7 +3,7 @@ import { StudentService } from './student.service';
 import { Student } from './schema/student.schema';
 import { StudentDTO } from './dto/student.dto';
 
-@Controller('student')
+@Controller('api/student')
 export class StudentController {
     constructor(private studentService: StudentService) {}
 
