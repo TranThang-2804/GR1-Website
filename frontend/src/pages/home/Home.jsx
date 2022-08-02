@@ -2,6 +2,7 @@ import * as React from "react";
 import {Grid, Box, Typography} from "@mui/material";
 import {Recap} from "./components/Recap";
 import StudentTable from "./components/table/StudentTable";
+import StudentInfo from "../StudentInformation/student-info-component"
 function Home() {
   return(
   <Box sx={{ flexGrow: 1 }}>
@@ -13,7 +14,7 @@ function Home() {
       </Grid>
       <Grid item xs={6} sm={5} md={4}>
         {/*Right sides Info*/}
-        <Typography  sx={{color: "blue", textAlign: "center", border: "10px dash black"}}>xs=6 sm=5 md=4</Typography>
+        <StudentInfo/>
       </Grid>
     </Grid>
   </Box>)
