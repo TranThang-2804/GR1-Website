@@ -2,7 +2,7 @@ import {Grid, Box, Typography, Divider, Button} from "@mui/material";
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-
+import { fontWeight } from "@mui/system";
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -26,12 +26,10 @@ const rowStyle = {
   my: 1
 }
 
-
 const GradeTable = (props) => {
   const finalScore = parseFloat(props.studentInfo.mathScore) + parseFloat(props.studentInfo.englishScore) + parseFloat(props.studentInfo.literatureScore); 
 
-  const columnsWidth = [2.5, 2.5, 2.5, 4.5]
-
+  const columnsWidth = [2.5, 3, 2.5, 4]
 
   return(
     <Grid item xs={12}>
@@ -43,16 +41,16 @@ const GradeTable = (props) => {
           <Grid component={Paper} container sx={{background: "#ffddcc"}}>
               <Grid container item xs={12} sx={{py:2}}>
                 <Grid item xs={columnsWidth[0]} align="center">
-                  <Typography sx={{...typoFont}}>Math</Typography>
+                  <Typography sx={{...typoFont, fontWeight:"bold"}}>Math</Typography>
                 </Grid>
                 <Grid item xs={columnsWidth[1]} align="center">
-                  <Typography sx={{...typoFont}}>Literature</Typography>
+                  <Typography sx={{...typoFont, fontWeight:"bold"}}>Literature</Typography>
                 </Grid>
                 <Grid item xs={columnsWidth[2]} align="center">
-                  <Typography sx={{...typoFont}}>English</Typography>
+                  <Typography sx={{...typoFont, fontWeight:"bold"}}>English</Typography>
                 </Grid>
                 <Grid item xs={columnsWidth[3]} align="center">
-                  <Typography sx={{...typoFont}}>Final score</Typography>
+                  <Typography sx={{...typoFont, fontWeight:"bold"}}>Final score</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={12}>
@@ -93,7 +91,7 @@ function StudentInfo(props) {
         p: 2,
         background: 'rgb(242, 242, 242)',
         minWidth: '350px',
-        maxWidth: '400px', 
+        maxWidth: '350px', 
       }}>
       <Grid container>
         <Grid item xs={12}>
