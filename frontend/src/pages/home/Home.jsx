@@ -7,7 +7,6 @@ import {useSelector} from "react-redux";
 
 function Home() {
   const selectedStudent = useSelector((state) => state.selectedStudent)
-  console.log(selectedStudent)
   return(
   <Box sx={{ flexGrow: 1 }} margin={{xs: 1, sm: 3, md: 6 }}>
     <Grid container spacing={{xs: 1, sm:3, md: 6}}>
@@ -16,7 +15,7 @@ function Home() {
         <StudentTable/>
       </Grid>
       <Grid item xs={6} sm={5} md={3}>
-        {selectedStudent && <StudentInfo studentInfo={selectedStudent}/>}
+        {selectedStudent && <StudentInfo/>}
       </Grid>
     </Grid>
   </Box>)
