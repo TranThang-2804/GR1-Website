@@ -2,7 +2,7 @@ import * as React from "react";
 import {Grid, Box} from "@mui/material";
 import {Recap} from "./components/Recap";
 import StudentTable from "./components/table/StudentTable";
-import StudentInfo from "../StudentInformation/student-info-component"
+import StudentInfo from "./components/studentinformation/StudentInfo"
 import {useSelector} from "react-redux";
 
 function Home() {
