@@ -41,16 +41,16 @@ const GradeTable = (props) => {
           <Grid component={Paper} container sx={{background: "#ffddcc"}}>
               <Grid container item xs={12} sx={{py:2}}>
                 <Grid item xs={columnsWidth[0]} align="center">
-                  <Typography sx={{...typoFont, fontWeight:"bold"}}>Math</Typography>
+                  <Typography noWrap sx={{...typoFont, fontWeight:"bold"}}>Math</Typography>
                 </Grid>
                 <Grid item xs={columnsWidth[1]} align="center">
-                  <Typography sx={{...typoFont, fontWeight:"bold"}}>Literature</Typography>
+                  <Typography noWrap sx={{...typoFont, fontWeight:"bold"}}>Literature</Typography>
                 </Grid>
                 <Grid item xs={columnsWidth[2]} align="center">
-                  <Typography sx={{...typoFont, fontWeight:"bold"}}>English</Typography>
+                  <Typography noWrap sx={{...typoFont, fontWeight:"bold"}}>English</Typography>
                 </Grid>
                 <Grid item xs={columnsWidth[3]} align="center">
-                  <Typography sx={{...typoFont, fontWeight:"bold"}}>Final score</Typography>
+                  <Typography noWrap sx={{...typoFont, fontWeight:"bold"}}>Final score</Typography>
                 </Grid>
               </Grid>
               <Grid item xs={12}>
@@ -86,14 +86,20 @@ function StudentInfo(props) {
   const formattedDob = dd + '/' + mm + '/' + yyyy;
 
   return(
+    <Box sx={{
+      display: 'flex',
+      justifyContent: 'center'
+    }}>
     <Box sx={{ 
         flexGrow: 1, 
         p: 2,
         background: 'rgb(242, 242, 242)',
-        minWidth: '350px',
         maxWidth: '350px', 
+        // display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
       }}>
-      <Grid container>
+      <Grid container >
         <Grid item xs={12}>
           <Typography sx={{
               ...typoFont,
@@ -188,6 +194,7 @@ function StudentInfo(props) {
           </Box>
         </Grid>
       </Grid>
+    </Box>
     </Box>
   )
 }
