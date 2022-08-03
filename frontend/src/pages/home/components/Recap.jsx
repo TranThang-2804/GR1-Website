@@ -21,7 +21,6 @@ export function Recap() {
     let avg = 0;
     data.forEach((value) => {
       avg += +value.mathScore;
-      console.log(avg);
     })
     return avg/data.length;
   }

@@ -16,6 +16,8 @@ import {Grid} from "@mui/material";
 import Button from "@mui/material/Button";
 import PublishRoundedIcon from '@mui/icons-material/PublishRounded';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import {useDispatch} from "react-redux";
+import {updateSelectedStudent} from "../../../../redux/actions";
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
@@ -49,6 +51,14 @@ export default function StudentTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [searched, setSearched] = React.useState("");
+
+  const dispatch = useDispatch();
+
+  const handleTableRowClick = (row) => {
+    dispatch(updateSelectedStudent({
+      ...row
+    }))
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -138,7 +148,7 @@ export default function StudentTable() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={() => {handleTableRowClick(row)}}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (

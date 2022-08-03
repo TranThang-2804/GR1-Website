@@ -1,5 +1,5 @@
 import {Grid, Box, Typography} from "@mui/material";
-import StudentInfo from "./student-info-component"
+import StudentInfo from "./StudentInfo"
 
 function TestPage() {
   return(

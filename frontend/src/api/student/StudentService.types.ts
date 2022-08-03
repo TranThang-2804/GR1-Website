@@ -1,6 +1,4 @@
 export type StudentResponse = {
-    finalScore: number;
-    name: string
     id : number,
     firstName : string,
     lastName : string | null,
@@ -10,6 +8,8 @@ export type StudentResponse = {
     mathScore : number,
     literatureScore : number,
     englishScore : number
+    finalScore: number;
+    name: string
 }
 
 export type StudentRequest = {

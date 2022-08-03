@@ -1,4 +1,4 @@
 import Home from "./home/Home";
-import TestPage from "./StudentInformation/TestComponentPage"
+import TestPage from "./home/components/studentinformation/TestComponentPage"
 
 export {Home, TestPage}
