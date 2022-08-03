@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Grid, Box, Typography} from "@mui/material";
+import {Grid, Box} from "@mui/material";
 import {Recap} from "./components/Recap";
 import StudentTable from "./components/table/StudentTable";
 import StudentInfo from "../StudentInformation/student-info-component"
