@@ -18,6 +18,7 @@ import PublishRoundedIcon from '@mui/icons-material/PublishRounded';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import {useDispatch} from "react-redux";
 import {updateSelectedStudent} from "../../../../redux/actions";
+import NewStudentPopup from "../newstudentpopup/NewStudentPoppup"
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
@@ -53,6 +54,11 @@ export default function StudentTable() {
   const [searched, setSearched] = React.useState("");
 
   const dispatch = useDispatch();
+
+  const newStudentPopup = () => {
+    console.log("hi"); 
+    return(<NewStudentPopup/>);
+  }
 
   const handleTableRowClick = (row) => {
     dispatch(updateSelectedStudent({
@@ -105,7 +111,7 @@ export default function StudentTable() {
             </Button>
           </Grid>
           <Grid item xs={6} container justifyContent="flex-end">
-            <Button sx={{height: '100%', width: '100%', display: {xs: 'inherit', md: 'none'}}} variant="contained" startIcon={<NoteAddIcon/>}>
+            <Button sx={{height: '100%', width: '100%', display: {xs: 'inherit', md: 'none'}}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {console.log('clicked');}}>
               New
             </Button>
           </Grid>
