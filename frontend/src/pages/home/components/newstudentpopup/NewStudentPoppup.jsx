@@ -7,7 +7,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import { Typography } from '@mui/material';
-import { NewStudentInfo } from '../components/NewStudentInfo'
+import NewStudentInfo from './components/NewStudentInfo'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -29,8 +29,8 @@ function NewStudentPoppup(props) {
 				<NewStudentInfo/>	
 			</DialogContent>
 			<DialogActions>
-				<Button Button sx={{height: '100%', width: '100%', display: {xs: 'inherit', md: 'none'}}} variant="contained" startIcon={<NoteAddIcon/>} onClick={props.handleClose}>Cancel</Button>
-				<Button Button sx={{height: '100%', width: '100%', display: {xs: 'inherit', md: 'none'}}} variant="contained" startIcon={<NoteAddIcon/>} onClick={props.handleClose}>Confirm</Button>
+				<Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={props.handleClose}>Cancel</Button>
+				<Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={props.handleClose}>Confirm</Button>
 			</DialogActions>
 		</Dialog>
   );
