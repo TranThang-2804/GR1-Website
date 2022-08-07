@@ -52,13 +52,17 @@ export default function StudentTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [searched, setSearched] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const dispatch = useDispatch();
-
-  const newStudentPopup = () => {
-    console.log("hi"); 
-    return(<NewStudentPopup/>);
-  }
 
   const handleTableRowClick = (row) => {
     dispatch(updateSelectedStudent({
@@ -103,6 +107,7 @@ export default function StudentTable() {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <NewStudentPopup open={open} handleClose={handleClose}/>
       <Grid container direction={{xs: 'column', md: 'row'}}>
         <Grid item xs={1} md={3} container direction='row'>
           <Grid item xs={6} md={12}>
@@ -111,7 +116,7 @@ export default function StudentTable() {
             </Button>
           </Grid>
           <Grid item xs={6} container justifyContent="flex-end">
-            <Button sx={{height: '100%', width: '100%', display: {xs: 'inherit', md: 'none'}}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {console.log('clicked');}}>
+            <Button sx={{height: '100%', width: '100%', display: {xs: 'inherit', md: 'none'}}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleClickOpen()}}>
               New
             </Button>
           </Grid>
@@ -128,7 +133,7 @@ export default function StudentTable() {
           />
         </Grid>
         <Grid item xs={1} md={3} container justifyContent="flex-end">
-          <Button sx={{height: '100%', width: '50%', display: {xs: 'none', md: 'inherit'}}} variant="contained" startIcon={<NoteAddIcon/>}>
+          <Button sx={{height: '100%', width: '50%', display: {xs: 'none', md: 'inherit'}}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleClickOpen()}}>
             New
           </Button>
         </Grid>
