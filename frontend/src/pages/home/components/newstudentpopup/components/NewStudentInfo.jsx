@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {Grid, Box, Typography, Divider, Button} from "@mui/material";
 import TextField from '@mui/material/TextField';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -25,7 +26,7 @@ const rowStyle = {
 }
 
 
-function NewStudentInfo() {
+function NewStudentInfo(props) {
 
     const newStudent = {
         id : null,
@@ -39,6 +40,17 @@ function NewStudentInfo() {
         englishScore : null
     }
     
+    const resetValue = () => {
+        setId(null);
+        setFirstName(null);
+        setLastName(null);
+        setDob(null);
+        setHighSchool(null);
+        setMathScore(null);
+        setLiteratureScore(null);
+        setEnglishScore(null);
+    }
+
     const [id, setId] = React.useState(null);
     const [firstName, setFirstName] = React.useState(null);
     const [lastName, setLastName] = React.useState(null);
@@ -48,20 +60,24 @@ function NewStudentInfo() {
     const [literatureScore, setLiteratureScore] = React.useState(null);
     const [englishScore, setEnglishScore] = React.useState(null);
 
+    const closePopup = props.handleClose;
+
     const handleOnChange = (event, setFunction) => {
         setFunction(event.target.value);
     }
 
+    const handleCancel = () => {
+        resetValue();
+        closePopup();
+        console.log(props.open)
+    }
+
+    const handleConfirm = () => {
+        closePopup();
+    }
+
     React.useEffect(() => {
-        setId(null);
-        setFirstName(null);
-        setLastName(null);
-        setDob(null);
-        setHighSchool(null);
-        setMathScore(null);
-        setLiteratureScore(null);
-        setEnglishScore(null);
-    }, []);
+    }, [id, lastName, dob, highSchool, mathScore, literatureScore, englishScore]);
 
     return(
         <Box sx={{}}>
@@ -101,7 +117,7 @@ function NewStudentInfo() {
                         />
                 </Grid>
                 </Grid>
-                                <Grid container item xs={12} sx={{...rowStyle}}>
+                <Grid container item xs={12} sx={{...rowStyle}}>
                 <Grid item xs={6}>
                     <Typography sx = {{...fieldTypoStyle}}>Last Name</Typography>
                 </Grid>
@@ -208,8 +224,10 @@ function NewStudentInfo() {
                 </Grid>
                 <Grid container item xs={12}>
                     <Grid item xs={6}>
-				        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={props.handleClose}>Cancel</Button>
-				        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={props.handleClose}>Confirm</Button>
+				        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleCancel()}}>Cancel</Button>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleConfirm()}}>Confirm</Button>
                     </Grid>
                 </Grid>
             </Grid> 
