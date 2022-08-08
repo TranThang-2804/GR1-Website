@@ -14,11 +14,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 function NewStudentPoppup(props) {
-  return (
+
+  	return (
 		<Dialog
 			open={props.open}
 			TransitionComponent={Transition}
-			keepMounted
+			// keepMounted
 			onClose={props.handleClose}
 			aria-describedby="add-student-slide-description"
 		>
@@ -26,12 +27,12 @@ function NewStudentPoppup(props) {
 				<Typography>{"Add Student into Database"}</Typography>
 			</DialogTitle>
 			<DialogContent>
-				<NewStudentInfo/>	
+				<NewStudentInfo handleClose={props.handleClose} open={props.open}/>	
 			</DialogContent>
-			<DialogActions>
+			{/* <DialogActions>
 				<Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={props.handleClose}>Cancel</Button>
 				<Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={props.handleClose}>Confirm</Button>
-			</DialogActions>
+			</DialogActions> */}
 		</Dialog>
   );
 }
