@@ -38,22 +38,11 @@ let newStudent = {
 }
 
 function NewStudentInfo(props) {
-    
-    const resetValue = () => {
-        setId(null);
-        setFirstName(null);
-        setLastName(null);
-        setDob(null);
-        setHighSchool(null);
-        setMathScore(null);
-        setLiteratureScore(null);
-        setEnglishScore(null);
-    }
-
     const [id, setId] = React.useState(null);
     const [firstName, setFirstName] = React.useState(null);
     const [lastName, setLastName] = React.useState(null);
     const [dob, setDob] = React.useState(null);
+    const [address, setAddress] = React.useState(null);
     const [highSchool, setHighSchool] = React.useState(null);
     const [mathScore, setMathScore] = React.useState(null);
     const [literatureScore, setLiteratureScore] = React.useState(null);
@@ -66,16 +55,15 @@ function NewStudentInfo(props) {
     }
 
     const handleCancel = () => {
-        // resetValue();
         closePopup();
     }
 
     const handleConfirm = () => {
-        console.log(newStudent);
+        // handle add new student api request to backend
+        
+
         closePopup();
     }
-
-    // React.useEffect(() => {}, [id, lastName, dob, highSchool, mathScore, literatureScore, englishScore]);
 
     return(
         <Box sx={{}}>
@@ -146,6 +134,24 @@ function NewStudentInfo(props) {
                             onChange={(event) => {
                                 handleOnChange(event, setDob); 
                                 newStudent.dob = event.target.value;
+                            }}
+                    />
+                </Grid>    
+                </Grid>
+
+                <Grid container item xs={12} sx={{...rowStyle}}>
+                <Grid item xs={6}>
+                    <Typography sx = {{...fieldTypoStyle}}>Address</Typography>
+                </Grid>
+                <Grid item xs={6}>                      
+                    <TextField
+                            id="address"
+                            placeholder="Address*"
+                            helperText=""
+                            value={address}
+                            onChange={(event) => {
+                                handleOnChange(event, setAddress); 
+                                newStudent.address = event.target.value;
                             }}
                     />
                 </Grid>    
