@@ -25,20 +25,19 @@ const rowStyle = {
   my: 1
 }
 
+let newStudent = {
+    id : null,
+    firstName : null,
+    lastName : null,
+    address : null,
+    dob: null,
+    highSchool : null,
+    mathScore : null,
+    literatureScore : null,
+    englishScore : null
+}
 
 function NewStudentInfo(props) {
-
-    const newStudent = {
-        id : null,
-        firstName : null,
-        lastName : null,
-        address : null,
-        dob: null,
-        highSchool : null,
-        mathScore : null,
-        literatureScore : null,
-        englishScore : null
-    }
     
     const resetValue = () => {
         setId(null);
@@ -67,17 +66,16 @@ function NewStudentInfo(props) {
     }
 
     const handleCancel = () => {
-        resetValue();
+        // resetValue();
         closePopup();
-        console.log(props.open)
     }
 
     const handleConfirm = () => {
+        console.log(newStudent);
         closePopup();
     }
 
-    React.useEffect(() => {
-    }, [id, lastName, dob, highSchool, mathScore, literatureScore, englishScore]);
+    // React.useEffect(() => {}, [id, lastName, dob, highSchool, mathScore, literatureScore, englishScore]);
 
     return(
         <Box sx={{}}>
@@ -227,7 +225,7 @@ function NewStudentInfo(props) {
 				        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleCancel()}}>Cancel</Button>
                     </Grid>
                     <Grid item xs={6}>
-                        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleConfirm()}}>Confirm</Button>
+                        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleConfirm();}}>Confirm</Button>
                     </Grid>
                 </Grid>
             </Grid> 
