@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { Student } from './schema/student.schema';
 import { StudentDTO } from './dto/student.dto';
@@ -13,7 +13,17 @@ export class StudentController {
     }
 
     @Post()
-    save(@Body() param : StudentDTO) {
-        this.studentService.save(param);
+    createNewStudent(@Body() param : Student) {
+        this.studentService.createNewStudent(param);
+    }
+
+    @Put()
+    updateStudent(@Body() student : Student) {
+        this.studentService.updateStudent(student);
+    }
+
+    @Delete(':id')
+    deleteStudent(@Param() param) {
+        this.studentService.deleteStudent(param.id);
     }
 }

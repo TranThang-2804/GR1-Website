@@ -1,8 +1,8 @@
-import {Grid, Box, Typography, Divider, Button} from "@mui/material";
-import Paper from '@mui/material/Paper';
+import {Grid, Box, Typography, Button} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { fontWeight } from "@mui/system";
+import {useSelector} from "react-redux";
+import {GradeTable} from "./GradeTable";
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -26,58 +26,10 @@ const rowStyle = {
   my: 1
 }
 
-const GradeTable = (props) => {
-  const finalScore = parseFloat(props.studentInfo.mathScore) + parseFloat(props.studentInfo.englishScore) + parseFloat(props.studentInfo.literatureScore); 
-
-  const columnsWidth = [2.5, 3, 2.5, 4]
-
-  return(
-    <Grid item xs={12}>
-      <Box sx={{
-          mx:2, 
-          my: 5
-        }}
-        >
-          <Grid component={Paper} container sx={{background: "#ffddcc"}}>
-              <Grid container item xs={12} sx={{py:2}}>
-                <Grid item xs={columnsWidth[0]} align="center">
-                  <Typography noWrap sx={{...typoFont, fontWeight:"bold"}}>Math</Typography>
-                </Grid>
-                <Grid item xs={columnsWidth[1]} align="center">
-                  <Typography noWrap sx={{...typoFont, fontWeight:"bold"}}>Literature</Typography>
-                </Grid>
-                <Grid item xs={columnsWidth[2]} align="center">
-                  <Typography noWrap sx={{...typoFont, fontWeight:"bold"}}>English</Typography>
-                </Grid>
-                <Grid item xs={columnsWidth[3]} align="center">
-                  <Typography noWrap sx={{...typoFont, fontWeight:"bold"}}>Final score</Typography>
-                </Grid>
-              </Grid>
-              <Grid item xs={12}>
-                <Divider sx={{mx:2}}/>
-              </Grid>
-              <Grid container item xs={12} sx={{py: 1}}>
-                <Grid item xs={columnsWidth[0]} align="center">
-                  <Typography sx={{...typoFont}}>{props.studentInfo.mathScore}</Typography>
-                </Grid>
-                <Grid item xs={columnsWidth[1]} align="center">
-                  <Typography sx={{...typoFont}}>{props.studentInfo.literatureScore}</Typography>
-                </Grid>
-                <Grid item xs={columnsWidth[2]} align="center">
-                  <Typography sx={{...typoFont}}>{props.studentInfo.englishScore}</Typography>
-                </Grid>
-                <Grid item xs={columnsWidth[3]} align="center">
-                  <Typography sx={{...typoFont}}>{finalScore}</Typography>
-                </Grid>
-              </Grid>
-          </Grid>
-      </Box>
-    </Grid>
-  );
-}
 
 function StudentInfo(props) {
-  const dob = new Date(props.studentInfo.dob)
+  const selectedStudent = useSelector((state) => state.selectedStudent)
+  const dob = new Date(selectedStudent.dob)
   const yyyy = dob.getFullYear();
   let mm = dob.getMonth() + 1; // Months start at 0!
   let dd = dob.getDate();
@@ -129,7 +81,7 @@ function StudentInfo(props) {
               m: 2
             }}
             >
-              {props.studentInfo.lastName} {props.studentInfo.firstName}
+              {selectedStudent.lastName} {selectedStudent.firstName}
             </Typography>
           </Box>
         </Grid>
@@ -139,7 +91,7 @@ function StudentInfo(props) {
             <Typography sx = {{...fieldTypoStyle}}>Student ID</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography sx = {{...valueTypoStyle}}>{props.studentInfo.id}</Typography>
+            <Typography sx = {{...valueTypoStyle}}>{selectedStudent.id}</Typography>
           </Grid>
         </Grid>
 
@@ -148,7 +100,7 @@ function StudentInfo(props) {
             <Typography sx = {{...fieldTypoStyle}}>Name</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography sx = {{...valueTypoStyle}}>{props.studentInfo.lastName} {props.studentInfo.firstName}</Typography>
+            <Typography sx = {{...valueTypoStyle}}>{selectedStudent.lastName} {selectedStudent.firstName}</Typography>
           </Grid>
         </Grid>
 
@@ -166,7 +118,7 @@ function StudentInfo(props) {
             <Typography sx = {{...fieldTypoStyle}}>Address</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography sx = {{...valueTypoStyle}}>{props.studentInfo.address}</Typography>
+            <Typography sx = {{...valueTypoStyle}}>{selectedStudent.address}</Typography>
           </Grid> 
         </Grid>
 
@@ -175,11 +127,11 @@ function StudentInfo(props) {
             <Typography sx = {{...fieldTypoStyle}}>School</Typography>
           </Grid>
           <Grid item xs={6}>
-            <Typography sx = {{...valueTypoStyle}}>{props.studentInfo.highSchool}</Typography>
+            <Typography sx = {{...valueTypoStyle}}>{selectedStudent.highSchool}</Typography>
           </Grid>  
         </Grid>  
         
-        <GradeTable studentInfo={props.studentInfo}/>
+        <GradeTable/>
         <Grid item xs={12}>
           <Box sx={{
             display: "flex",

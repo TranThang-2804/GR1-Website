@@ -159,7 +159,7 @@ export default function StudentTable() {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={() => {handleTableRowClick(row)}}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id} onClick={() => {handleTableRowClick(row)}} sx={{cursor: 'pointer'}}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
