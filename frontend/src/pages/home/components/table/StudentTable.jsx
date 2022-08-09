@@ -18,6 +18,7 @@ import PublishRoundedIcon from '@mui/icons-material/PublishRounded';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import {useDispatch} from "react-redux";
 import {updateSelectedStudent} from "../../../../redux/actions";
+import NewStudentPopup from "../newstudentpopup/NewStudentPoppup"
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
@@ -51,6 +52,15 @@ export default function StudentTable() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [searched, setSearched] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const dispatch = useDispatch();
 
@@ -97,6 +107,7 @@ export default function StudentTable() {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <NewStudentPopup open={open} handleClose={handleClose}/>
       <Grid container direction={{xs: 'column', md: 'row'}}>
         <Grid item xs={1} md={3} container direction='row'>
           <Grid item xs={6} md={12}>
@@ -105,7 +116,7 @@ export default function StudentTable() {
             </Button>
           </Grid>
           <Grid item xs={6} container justifyContent="flex-end">
-            <Button sx={{height: '100%', width: '100%', display: {xs: 'inherit', md: 'none'}}} variant="contained" startIcon={<NoteAddIcon/>}>
+            <Button sx={{height: '100%', width: '100%', display: {xs: 'inherit', md: 'none'}}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleClickOpen()}}>
               New
             </Button>
           </Grid>
@@ -122,7 +133,7 @@ export default function StudentTable() {
           />
         </Grid>
         <Grid item xs={1} md={3} container justifyContent="flex-end">
-          <Button sx={{height: '100%', width: '50%', display: {xs: 'none', md: 'inherit'}}} variant="contained" startIcon={<NoteAddIcon/>}>
+          <Button sx={{height: '100%', width: '50%', display: {xs: 'none', md: 'inherit'}}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleClickOpen()}}>
             New
           </Button>
         </Grid>
