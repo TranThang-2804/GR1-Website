@@ -9,7 +9,9 @@ const typoFont = {
 
 const fieldTypoStyle = {
   ...typoFont,
+  display: 'flex',
   color: "rgb(136, 136, 136)",
+  alignItems: 'center',
   fontSize: 16,
   fontWeight: "bold"
 }
@@ -19,6 +21,10 @@ const valueTypoStyle = {
   color: "black",
   fontSize: 16,
   fontWeight: "medium"
+}
+
+const textFieldStyle = {
+
 }
 
 const rowStyle = {
@@ -66,23 +72,31 @@ function NewStudentInfo(props) {
     }
 
     return(
-        <Box sx={{}}>
+        <Box sx={{
+            width: '100%', 
+            justifyContent: 'center', 
+            alignItems:'center',
+            maxWidth: '500px'
+        }}>
            <Grid container sx={{}}>
+
                 <Grid container item xs={12} sx={{...rowStyle}}>
                 <Grid item xs={6}>
                     <Typography sx = {{...fieldTypoStyle}}>Student ID</Typography>
                 </Grid>
                 <Grid item xs={6}>                  
                     <TextField
-                            id="student-id"
-                            placeholder="Student ID*"
-                            helperText=""
-                            value={id}
-                            onChange={(event) => {
-                                handleOnChange(event, setId); 
-                                newStudent.id = event.target.value;
-                            }}
-                        />
+                        sx={{...textFieldStyle}}
+                        id="student-id"
+                        placeholder="Student ID*"
+                        // helperText={"hong me may roi"}
+                        // error={false}
+                        value={id}
+                        onChange={(event) => {
+                            handleOnChange(event, setId); 
+                            newStudent.id = event.target.value;
+                        }}
+                    />
                 </Grid>
                 </Grid>
 
@@ -92,15 +106,17 @@ function NewStudentInfo(props) {
                 </Grid>
                 <Grid item xs={6}>                     
                     <TextField
-                            id="first-name"
-                            placeholder="First Name*"
-                            helperText=""
-                            value={firstName}
-                            onChange={(event) => {
-                                handleOnChange(event, setFirstName); 
-                                newStudent.firstName = event.target.value;
-                            }}
-                        />
+                        sx={{...textFieldStyle}}
+
+                        id="first-name"
+                        placeholder="First Name*"
+                        helperText=""
+                        value={firstName}
+                        onChange={(event) => {
+                            handleOnChange(event, setFirstName); 
+                            newStudent.firstName = event.target.value;
+                        }}
+                    />
                 </Grid>
                 </Grid>
                 <Grid container item xs={12} sx={{...rowStyle}}>
@@ -109,15 +125,16 @@ function NewStudentInfo(props) {
                 </Grid>
                 <Grid item xs={6}>                   
                     <TextField
-                            id="last-name"
-                            placeholder="Last Name*"
-                            helperText=""
-                            value={lastName}
-                            onChange={(event) => {
-                                handleOnChange(event, setLastName); 
-                                newStudent.lastName = event.target.value;
-                            }}
-                        />
+                        sx={{...textFieldStyle}}
+                        id="last-name"
+                        placeholder="Last Name*"
+                        helperText=""
+                        value={lastName}
+                        onChange={(event) => {
+                            handleOnChange(event, setLastName); 
+                            newStudent.lastName = event.target.value;
+                        }}
+                    />
                 </Grid>
                 </Grid>
 
@@ -127,14 +144,15 @@ function NewStudentInfo(props) {
                 </Grid>
                 <Grid item xs={6}>                      
                     <TextField
-                            id="date-of-birth"
-                            placeholder="Date of birth*"
-                            helperText=""
-                            value={dob}
-                            onChange={(event) => {
-                                handleOnChange(event, setDob); 
-                                newStudent.dob = event.target.value;
-                            }}
+                        sx={{...textFieldStyle}}
+                        id="date-of-birth"
+                        placeholder="Date of birth*"
+                        helperText=""
+                        value={dob}
+                        onChange={(event) => {
+                            handleOnChange(event, setDob); 
+                            newStudent.dob = event.target.value;
+                        }}
                     />
                 </Grid>    
                 </Grid>
@@ -145,14 +163,15 @@ function NewStudentInfo(props) {
                 </Grid>
                 <Grid item xs={6}>                      
                     <TextField
-                            id="address"
-                            placeholder="Address*"
-                            helperText=""
-                            value={address}
-                            onChange={(event) => {
-                                handleOnChange(event, setAddress); 
-                                newStudent.address = event.target.value;
-                            }}
+                        sx={{...textFieldStyle}}
+                        id="address"
+                        placeholder="Address*"
+                        helperText=""
+                        value={address}
+                        onChange={(event) => {
+                            handleOnChange(event, setAddress); 
+                            newStudent.address = event.target.value;
+                        }}
                     />
                 </Grid>    
                 </Grid>
@@ -163,15 +182,16 @@ function NewStudentInfo(props) {
                 </Grid>
                 <Grid item xs={6}>  
                     <TextField
-                            id="High-School"
-                            placeholder="High School*"
-                            helperText=""
-                            value={highSchool}
-                            onChange={(event) => {
-                                handleOnChange(event, setHighSchool); 
-                                newStudent.highSchool = event.target.value;
-                            }}
-                        />
+                        sx={{...textFieldStyle}}
+                        id="High-School"
+                        placeholder="High School*"
+                        helperText=""
+                        value={highSchool}
+                        onChange={(event) => {
+                            handleOnChange(event, setHighSchool); 
+                            newStudent.highSchool = event.target.value;
+                        }}
+                    />
                 </Grid> 
                 </Grid>
 
@@ -181,15 +201,16 @@ function NewStudentInfo(props) {
                 </Grid>
                 <Grid item xs={6}>         
                     <TextField
-                            id="math-score"
-                            placeholder="Math Score*"
-                            helperText=""
-                            value={mathScore}
-                            onChange={(event) => {
-                                handleOnChange(event, setMathScore); 
-                                newStudent.mathScore = event.target.value;
-                            }}
-                        />
+                        sx={{...textFieldStyle}}
+                        id="math-score"
+                        placeholder="Math Score*"
+                        helperText=""
+                        value={mathScore}
+                        onChange={(event) => {
+                            handleOnChange(event, setMathScore); 
+                            newStudent.mathScore = event.target.value;
+                        }}
+                    />
                 </Grid>  
                 </Grid>  
                 <Grid container item xs={12} sx={{...rowStyle}}>
@@ -198,15 +219,16 @@ function NewStudentInfo(props) {
                 </Grid>
                 <Grid item xs={6}>                   
                     <TextField
-                            id="literature-score"
-                            placeholder="Literature Score*"
-                            helperText=""
-                            value={literatureScore}
-                            onChange={(event) => {
-                                handleOnChange(event, setLiteratureScore); 
-                                newStudent.literatureScore = event.target.value;
-                            }}
-                        />
+                        sx={{...textFieldStyle}}
+                        id="literature-score"
+                        placeholder="Literature Score*"
+                        helperText=""
+                        value={literatureScore}
+                        onChange={(event) => {
+                            handleOnChange(event, setLiteratureScore); 
+                            newStudent.literatureScore = event.target.value;
+                        }}
+                    />
                 </Grid>
                 </Grid>
                 <Grid container item xs={12} sx={{...rowStyle}}>
@@ -215,15 +237,16 @@ function NewStudentInfo(props) {
                 </Grid>
                 <Grid item xs={6}>                  
                     <TextField
-                            id="English-score"
-                            placeholder="English Score*"
-                            helperText=""
-                            value={englishScore}
-                            onChange={(event) => {
-                                handleOnChange(event, setEnglishScore); 
-                                newStudent.englishScore = event.target.value;
-                            }}
-                        />
+                        sx={{...textFieldStyle}}
+                        id="English-score"
+                        placeholder="English Score*"
+                        helperText=""
+                        value={englishScore}
+                        onChange={(event) => {
+                            handleOnChange(event, setEnglishScore); 
+                            newStudent.englishScore = event.target.value;
+                        }}
+                    />
                 </Grid>
                 </Grid>
                 <Grid container item xs={12}>
