@@ -11,11 +11,19 @@ export class StudentService {
         private studentsRepository: Repository<Student>,
     ) {}
 
-    findAll() : Promise<Student[]> {
-        return this.studentsRepository.find();
+    async findAll() : Promise<Student[]> {
+        return await this.studentsRepository.find();
     }
 
-    save(param : StudentDTO) {
-        this.studentsRepository.save(param);
+    async createNewStudent(param : Student) : Promise<Student> {
+        return await this.studentsRepository.save(param);
+    }
+
+    async updateStudent(param : Student) {
+        return await this.studentsRepository.update(param.id, param);
+    }
+
+    async deleteStudent(id : number) {
+        return await this.studentsRepository.delete(id);
     }
 }
