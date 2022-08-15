@@ -4,7 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {useDispatch, useSelector} from "react-redux";
 import {GradeTable} from "./GradeTable";
 import StudentService from "../../../../api/student/StudentService";
-import {updateRefreshState} from "../../../../redux/actions";
+import {updateRefreshState, updateSelectedStudent} from "../../../../redux/actions";
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -45,6 +45,7 @@ function StudentInfo(props) {
   const deleteStudent = () => {
     StudentService.deleteStudent(selectedStudent.id).then(() => {
       dispatch(updateRefreshState(!stateRefresh));
+      dispatch(updateSelectedStudent(null));
     });
   }
 

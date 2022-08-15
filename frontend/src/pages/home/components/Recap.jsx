@@ -1,16 +1,17 @@
 import {Box, Grid, Typography} from "@mui/material";
 import StudentService from "../../../api/student/StudentService";
 import * as React from "react";
+import {useSelector} from "react-redux";
 export function Recap() {
   const [data, setData] = React.useState([]);
-
+  const stateRefresh = useSelector((state) => state.stateRefresh);
   React.useEffect(() => {
     StudentService.findAll().then((response) => {
       if(response && response.data){
         setData(response.data);
       }
     })
-  }, [])
+  }, [stateRefresh])
 
   data.forEach((row, index) => {
     row.name = row.lastName + ' ' + row.firstName;

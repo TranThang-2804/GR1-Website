@@ -7,12 +7,19 @@ const initState = {
 const rootReducer = (state = initState, action) => {
   switch (action.type) {
     case 'selectedStudent/update':
-      return {
-        ...state,
-        selectedStudent: {
-          ...action.payload
+      if(action.payload != null) {
+        return {
+          ...state,
+          selectedStudent: {
+            ...action.payload
+          }
         }
-      }
+      }else {
+          return {
+            ...state,
+            selectedStudent: null
+          }
+        }
     case 'studentList/add':
       return {
         ...state,

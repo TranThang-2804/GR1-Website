@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import StudentService from "../../../../../api/student/StudentService";
 import {useDispatch, useSelector} from "react-redux";
-import {updateRefreshState} from "../../../../../redux/actions";
+import {updateRefreshState, updateSelectedStudent} from "../../../../../redux/actions";
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -73,7 +73,8 @@ function NewStudentInfo(props) {
     const handleConfirm = () => {
         // handle add new student api request to backend
         StudentService.createNewStudent(newStudent).then(() => {
-            dispatch(updateRefreshState(!stateRefresh))
+            dispatch(updateRefreshState(!stateRefresh));
+            dispatch(updateSelectedStudent(newStudent));
             closePopup();
         });
 
