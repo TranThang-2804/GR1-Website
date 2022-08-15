@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import StudentService from "../../../../../api/student/StudentService";
 import {useDispatch, useSelector} from "react-redux";
+import * as Validator from  "./InputConstraint"
 import {updateRefreshState} from "../../../../../redux/actions";
 
 const typoFont = {
@@ -50,6 +51,17 @@ function NewStudentInfo(props) {
     const [literatureScore, setLiteratureScore] = React.useState(null);
     const [englishScore, setEnglishScore] = React.useState(null);
 
+    const [idError, setIdError] = React.useState(false);
+    const [firstNameError, setFirstNameError] = React.useState(false);
+    const [lastNameError, setLastNameError] = React.useState(false);
+    const [dobError, setDobError] = React.useState(false);
+    const [addressError, setAddressError] = React.useState(false);
+    const [highSchoolError, setHighSchoolError] = React.useState(false);
+    const [mathScoreError, setMathScoreError] = React.useState(false);
+    const [literatureScoreError, setLiteratureScoreError] = React.useState(false);
+    const [englishScoreError, setEnglishScoreError] = React.useState(false);
+
+
     const closePopup = props.handleClose;
 
     const stateRefresh = useSelector((state) => state.stateRefresh);
@@ -57,13 +69,29 @@ function NewStudentInfo(props) {
 
     const handleOnChange = (event, setFunction) => {
         setFunction(event.target.value);
+        validate();
+    }
+
+    const validate = () => {
+        setIdError(!Validator.validateId(id));
+        setFirstNameError(!Validator.validateFirstName(firstName));
+        setLastNameError(!Validator.validateLastName(lastName));
+        setDobError(!Validator.validateDob(dob));
+        setAddressError(!Validator.validateAddressError(address));
+        setHighSchoolError(!Validator.validateHighSchoolError(highSchool));
+        setMathScoreError(!Validator.validateMathScore(mathScore));
+        setLiteratureScoreError(!Validator.validateLiteratureScore(literatureScore));
+        setEnglishScoreError(!Validator.validateEnglishScore(englishScore));
     }
 
     const handleCancel = () => {
         closePopup();
     }
 
+
     const handleConfirm = () => {
+        validate();
+        if(idError || firstNameError || lastNameError || dobError || addressError || highSchoolError || mathScoreError || literatureScoreError || englishScoreError) return;
         // handle add new student api request to backend
         StudentService.createNewStudent(newStudent).then((res) => {
             dispatch(updateRefreshState(!stateRefresh));
@@ -93,8 +121,8 @@ function NewStudentInfo(props) {
                         sx={{...textFieldStyle}}
                         id="student-id"
                         placeholder="Student ID*"
-                        // helperText={"hong me may roi"}
-                        // error={false}
+                        helperText={idError ? "Invalid Input" : ""}
+                        error={idError}
                         value={id}
                         onChange={(event) => {
                             handleOnChange(event, setId); 
@@ -111,10 +139,10 @@ function NewStudentInfo(props) {
                 <Grid item xs={6}>                     
                     <TextField
                         sx={{...textFieldStyle}}
-
+                        helperText={firstNameError ? "Invalid Input" : ""}
+                        error={firstNameError}
                         id="first-name"
                         placeholder="First Name*"
-                        helperText=""
                         value={firstName}
                         onChange={(event) => {
                             handleOnChange(event, setFirstName); 
@@ -130,9 +158,10 @@ function NewStudentInfo(props) {
                 <Grid item xs={6}>                   
                     <TextField
                         sx={{...textFieldStyle}}
+                        helperText={lastNameError ? "Invalid Input" : ""}
+                        error={lastNameError}
                         id="last-name"
                         placeholder="Last Name*"
-                        helperText=""
                         value={lastName}
                         onChange={(event) => {
                             handleOnChange(event, setLastName); 
@@ -151,7 +180,8 @@ function NewStudentInfo(props) {
                         sx={{...textFieldStyle}}
                         id="date-of-birth"
                         placeholder="Date of birth*"
-                        helperText=""
+                        helperText={dobError ? "Invalid Input" : ""}
+                        error={dobError}
                         value={dob}
                         onChange={(event) => {
                             handleOnChange(event, setDob); 
@@ -170,7 +200,8 @@ function NewStudentInfo(props) {
                         sx={{...textFieldStyle}}
                         id="address"
                         placeholder="Address*"
-                        helperText=""
+                        helperText={addressError ? "Invalid Input" : ""}
+                        error={addressError}
                         value={address}
                         onChange={(event) => {
                             handleOnChange(event, setAddress); 
@@ -189,7 +220,8 @@ function NewStudentInfo(props) {
                         sx={{...textFieldStyle}}
                         id="High-School"
                         placeholder="High School*"
-                        helperText=""
+                        helperText={highSchoolError ? "Invalid Input" : ""}
+                        error={highSchoolError}
                         value={highSchool}
                         onChange={(event) => {
                             handleOnChange(event, setHighSchool); 
@@ -208,7 +240,8 @@ function NewStudentInfo(props) {
                         sx={{...textFieldStyle}}
                         id="math-score"
                         placeholder="Math Score*"
-                        helperText=""
+                        helperText={mathScoreError ? "Invalid Input" : ""}
+                        error={mathScoreError}
                         value={mathScore}
                         onChange={(event) => {
                             handleOnChange(event, setMathScore); 
@@ -226,7 +259,8 @@ function NewStudentInfo(props) {
                         sx={{...textFieldStyle}}
                         id="literature-score"
                         placeholder="Literature Score*"
-                        helperText=""
+                        helperText={literatureScoreError ? "Invalid Input" : ""}
+                        error={literatureScoreError}
                         value={literatureScore}
                         onChange={(event) => {
                             handleOnChange(event, setLiteratureScore); 
@@ -244,7 +278,8 @@ function NewStudentInfo(props) {
                         sx={{...textFieldStyle}}
                         id="English-score"
                         placeholder="English Score*"
-                        helperText=""
+                        helperText={englishScoreError ? "Invalid Input" : ""}
+                        error={englishScoreError}
                         value={englishScore}
                         onChange={(event) => {
                             handleOnChange(event, setEnglishScore); 

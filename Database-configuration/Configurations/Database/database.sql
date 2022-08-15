@@ -1,5 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.30, for Linux (aarch64)
---
+
+DROP DATABASE IF EXISTS mydb;
+    CREATE DATABASE mydb;
+    USE mydb;
+-- MySQL dump 10.13  Distrib 8.0.29, for Linux (aarch64)
 -- Host: localhost    Database: mydb
 -- ------------------------------------------------------
 -- Server version	8.0.30
