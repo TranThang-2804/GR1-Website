@@ -8,7 +8,7 @@ const typoFont = {
 
 export const GradeTable = () => {
   const selectedStudent = useSelector((state) => state.selectedStudent);
-  const finalScore = parseFloat(selectedStudent.mathScore) + parseFloat(selectedStudent.englishScore) + parseFloat(selectedStudent.literatureScore);
+  const finalScore = 2 * parseFloat(selectedStudent.mathScore) + parseFloat(selectedStudent.englishScore) + 2 * parseFloat(selectedStudent.literatureScore);
 
   const columnsWidth = [2.5, 3, 2.5, 4]
 
