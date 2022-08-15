@@ -37,7 +37,7 @@ export class StudentController {
 
     @Delete(':id')
     deleteStudent(@Param() param) : string {
-        return "Delete successfully";
         this.studentService.deleteStudent(param.id);
+        return "Delete successfully";
     }
 }
