@@ -1,7 +1,10 @@
 import * as React from 'react';
-import {Grid, Box, Typography, Divider, Button} from "@mui/material";
+import {Grid, Box, Typography, Button} from "@mui/material";
 import TextField from '@mui/material/TextField';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import StudentService from "../../../../../api/student/StudentService";
+import {useDispatch, useSelector} from "react-redux";
+import {updateRefreshState} from "../../../../../redux/actions";
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -16,12 +19,12 @@ const fieldTypoStyle = {
   fontWeight: "bold"
 }
 
-const valueTypoStyle = {
-  ...typoFont,
-  color: "black",
-  fontSize: 16,
-  fontWeight: "medium"
-}
+// const valueTypoStyle = {
+//   ...typoFont,
+//   color: "black",
+//   fontSize: 16,
+//   fontWeight: "medium"
+// }
 
 const textFieldStyle = {
 
@@ -32,15 +35,15 @@ const rowStyle = {
 }
 
 let newStudent = {
-    id : null,
-    firstName : null,
+    id : NaN,
+    firstName : "",
     lastName : null,
     address : null,
-    dob: null,
-    highSchool : null,
-    mathScore : null,
-    literatureScore : null,
-    englishScore : null
+    dob: new Date(),
+    highSchool : "",
+    mathScore : NaN,
+    literatureScore : NaN,
+    englishScore : NaN
 }
 
 function NewStudentInfo(props) {
@@ -56,6 +59,9 @@ function NewStudentInfo(props) {
 
     const closePopup = props.handleClose;
 
+    const stateRefresh = useSelector((state) => state.stateRefresh);
+    const dispatch = useDispatch();
+
     const handleOnChange = (event, setFunction) => {
         setFunction(event.target.value);
     }
@@ -66,9 +72,11 @@ function NewStudentInfo(props) {
 
     const handleConfirm = () => {
         // handle add new student api request to backend
-        
+        StudentService.createNewStudent(newStudent).then(() => {
+            dispatch(updateRefreshState(!stateRefresh))
+            closePopup();
+        });
 
-        closePopup();
     }
 
     return(
@@ -94,7 +102,7 @@ function NewStudentInfo(props) {
                         value={id}
                         onChange={(event) => {
                             handleOnChange(event, setId); 
-                            newStudent.id = event.target.value;
+                            newStudent.id = Number(event.target.value);
                         }}
                     />
                 </Grid>
@@ -151,7 +159,7 @@ function NewStudentInfo(props) {
                         value={dob}
                         onChange={(event) => {
                             handleOnChange(event, setDob); 
-                            newStudent.dob = event.target.value;
+                            newStudent.dob = new Date(event.target.value);
                         }}
                     />
                 </Grid>    
@@ -208,7 +216,7 @@ function NewStudentInfo(props) {
                         value={mathScore}
                         onChange={(event) => {
                             handleOnChange(event, setMathScore); 
-                            newStudent.mathScore = event.target.value;
+                            newStudent.mathScore = Number(event.target.value);
                         }}
                     />
                 </Grid>  
@@ -226,7 +234,7 @@ function NewStudentInfo(props) {
                         value={literatureScore}
                         onChange={(event) => {
                             handleOnChange(event, setLiteratureScore); 
-                            newStudent.literatureScore = event.target.value;
+                            newStudent.literatureScore = Number(event.target.value);
                         }}
                     />
                 </Grid>
@@ -244,7 +252,7 @@ function NewStudentInfo(props) {
                         value={englishScore}
                         onChange={(event) => {
                             handleOnChange(event, setEnglishScore); 
-                            newStudent.englishScore = event.target.value;
+                            newStudent.englishScore = Number(event.target.value);
                         }}
                     />
                 </Grid>
@@ -254,7 +262,7 @@ function NewStudentInfo(props) {
 				        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleCancel()}}>Cancel</Button>
                     </Grid>
                     <Grid item xs={6}>
-                        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleConfirm();}}>Confirm</Button>
+                        <Button sx={{height: '100%', width: '100%'}} variant="contained" startIcon={<NoteAddIcon/>} onClick={() => {handleConfirm()}}>Confirm</Button>
                     </Grid>
                 </Grid>
             </Grid> 

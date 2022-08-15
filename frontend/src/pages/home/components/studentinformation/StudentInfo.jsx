@@ -1,8 +1,10 @@
 import {Grid, Box, Typography, Button} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {GradeTable} from "./GradeTable";
+import StudentService from "../../../../api/student/StudentService";
+import {updateRefreshState} from "../../../../redux/actions";
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -29,6 +31,8 @@ const rowStyle = {
 
 function StudentInfo(props) {
   const selectedStudent = useSelector((state) => state.selectedStudent)
+  const stateRefresh = useSelector((state) => state.stateRefresh);
+
   const dob = new Date(selectedStudent.dob)
   const yyyy = dob.getFullYear();
   let mm = dob.getMonth() + 1; // Months start at 0!
@@ -36,6 +40,13 @@ function StudentInfo(props) {
   if (dd < 10) dd = '0' + dd;
   if (mm < 10) mm = '0' + mm;
   const formattedDob = dd + '/' + mm + '/' + yyyy;
+  const dispatch = useDispatch();
+
+  const deleteStudent = () => {
+    StudentService.deleteStudent(selectedStudent.id).then(() => {
+      dispatch(updateRefreshState(!stateRefresh));
+    });
+  }
 
   return(
     <Box sx={{
@@ -140,7 +151,7 @@ function StudentInfo(props) {
             <Button variant="contained" startIcon={<EditIcon />} sx={{mx:1}}>
               <Typography sx={{...typoFont, fontSize: 12}}>Edit</Typography>
             </Button>
-            <Button color="error" variant="contained" startIcon={<DeleteIcon />} sx={{mx:1, backgroud:"red", color:"white"}} >
+            <Button color="error" variant="contained" startIcon={<DeleteIcon />} sx={{mx:1, backgroud:"red", color:"white"}} onClick={() => {deleteStudent()}} >
               <Typography sx={{...typoFont, fontSize: 12}}>Delete</Typography>
             </Button>
           </Box>

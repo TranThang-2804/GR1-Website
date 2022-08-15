@@ -8,7 +8,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import './StudentTable.css';
-import {useEffect} from "react";
 import StudentService from "../../../../api/student/StudentService";
 import WalaTextField from "../../../../components/WalaTextField";
 import SearchIcon from '@mui/icons-material/Search';
@@ -16,9 +15,9 @@ import {Grid} from "@mui/material";
 import Button from "@mui/material/Button";
 import PublishRoundedIcon from '@mui/icons-material/PublishRounded';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
-import {useDispatch} from "react-redux";
-import {updateSelectedStudent} from "../../../../redux/actions";
+import {useDispatch, useSelector} from "react-redux";
 import NewStudentPopup from "../newstudentpopup/NewStudentPoppup"
+import {updateSelectedStudent} from "../../../../redux/actions";
 
 const columns = [
   { id: 'id', label: 'ID', minWidth: 100 },
@@ -48,11 +47,14 @@ const columns = [
 ];
 
 export default function StudentTable() {
+  const studentList = useSelector((state) => state.studentList);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [rows, setRows] = React.useState([]);
+  const [rows, setRows] = React.useState(studentList);
   const [searched, setSearched] = React.useState("");
   const [open, setOpen] = React.useState(false);
+
+  const stateRefresh = useSelector((state) => state.stateRefresh);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -92,13 +94,13 @@ export default function StudentTable() {
     )
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     StudentService.findAll().then((response) => {
       if(response && response.data){
         setRows(response.data);
       }
     })
-  }, [])
+  }, [stateRefresh])
 
   rows.forEach((row, index) => {
     row.name = row.lastName + ' ' + row.firstName;
