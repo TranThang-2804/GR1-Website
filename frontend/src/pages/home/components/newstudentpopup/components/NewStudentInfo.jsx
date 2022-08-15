@@ -98,8 +98,8 @@ function NewStudentInfo(props) {
                         sx={{...textFieldStyle}}
                         id="student-id"
                         placeholder="Student ID*"
-                        // helperText={"hong me may roi"}
-                        // error={false}
+                        helperText={idHelperText}
+                        error={idError}
                         value={id}
                         onChange={(event) => {
                             handleOnChange(event, setId); 
