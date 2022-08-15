@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { StudentDTO } from './dto/student.dto';
 import { Student } from './schema/student.schema';
 
@@ -19,11 +19,11 @@ export class StudentService {
         return await this.studentsRepository.save(param);
     }
 
-    async updateStudent(param : Student) {
+    async updateStudent(param : Student) : Promise<UpdateResult> {
         return await this.studentsRepository.update(param.id, param);
     }
 
-    async deleteStudent(id : number) {
+    async deleteStudent(id : number) : Promise<DeleteResult> {
         return await this.studentsRepository.delete(id);
     }
 }

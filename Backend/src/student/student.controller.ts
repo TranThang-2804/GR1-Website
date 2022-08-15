@@ -14,16 +14,16 @@ export class StudentController {
 
     @Post()
     createNewStudent(@Body() param : Student) {
-        this.studentService.createNewStudent(param);
+        return this.studentService.createNewStudent(param);
     }
 
     @Put()
     updateStudent(@Body() student : Student) {
-        this.studentService.updateStudent(student);
+        return this.studentService.updateStudent(student);
     }
 
     @Delete(':id')
     deleteStudent(@Param() param) {
-        this.studentService.deleteStudent(param.id);
+        return this.studentService.deleteStudent(param.id);
     }
 }
