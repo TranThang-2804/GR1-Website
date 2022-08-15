@@ -1,12 +1,3 @@
-DROP DATABASE IF EXISTS mydb;
-    CREATE DATABASE mydb;
-    USE mydb;
-DROP DATABASE IF EXISTS mydb;
-    CREATE DATABASE mydb;
-    USE mydb;
-DROP DATABASE IF EXISTS mydb;
-    CREATE DATABASE mydb;
-    USE mydb;
 -- MySQL dump 10.13  Distrib 8.0.29, for Linux (aarch64)
 --
 -- Host: localhost    Database: mydb
@@ -77,7 +68,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'Hung','To','Dinh Cong','2001-12-23 00:00:00','Tran Nhan Tong',9.0,5.0,10.0),(2,'Thang','Tran','My Dinh','2001-04-29 00:00:00','Phan Dinh Phung',8.5,3.0,9.5),(3,'Hieu','Tran','Thanh Cong','2001-12-12 00:00:00','Phan Dinh Phung',9.0,6.0,10.0),(4,'Anh','Phan','Dong Anh','2001-01-01 00:00:00','Dong Anh 1',10.0,10.0,10.0);
+INSERT INTO `student` VALUES (1,'Hung','To','Dinh Cong','2001-12-23 00:00:00','Tran Nhan Tong',9.0,5.0,10.0),(2,'Thang','Tran','My Dinh','2001-04-29 00:00:00','Chuyen Nguyen Hue',10.0,10.0,10.0),(3,'Hieu','Tran','Thanh Cong','2001-12-12 00:00:00','Phan Dinh Phung',9.0,6.0,10.0),(4,'Anh','Phan','Dong Anh','2001-01-01 00:00:00','Dong Anh 1',10.0,10.0,10.0);
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -90,4 +81,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-31 18:41:53
+-- Dump completed on 2022-08-15 14:33:50
