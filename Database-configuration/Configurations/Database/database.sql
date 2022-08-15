@@ -1,3 +1,6 @@
+DROP DATABASE IF EXISTS mydb;
+    CREATE DATABASE mydb;
+    USE mydb;
 -- MySQL dump 10.13  Distrib 8.0.30, for Linux (aarch64)
 >>>>>>> 06b66b2613671c6b5ae5d3d4de0e6590a470fd5c
 --
