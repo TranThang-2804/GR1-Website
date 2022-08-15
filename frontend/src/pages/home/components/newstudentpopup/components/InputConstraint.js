@@ -4,7 +4,8 @@ const validateAlphabetString = (string) => {
 }
 
 const validateScore = (score) => {
-    if (!/^[0-9]?[0-9]?(.[0-9][0-9]?)?/.test(score)) return false;
+    if (/w/.test)
+        if (!/(?<![\d.])(\d{1,2}|\d{0,2}.\d{1,2})?(?![\d.])/.test(score)) return false;
     let intScore = parseFloat(score);
     if ((intScore < 0) || intScore > 10) return false;
     return true;
