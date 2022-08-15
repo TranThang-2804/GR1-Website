@@ -1,9 +1,11 @@
 const validateAlphabetString = (string) => {
+    if (string == null) return false;
     if (!/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(string)) return false;
     return true;
 }
 
 const validateScore = (score) => {
+    if (score == null) return false;
     if (/w/.test)
         if (!/(?<![\d.])(\d{1,2}|\d{0,2}.\d{1,2})?(?![\d.])/.test(score)) return false;
     let intScore = parseFloat(score);
@@ -32,6 +34,7 @@ export const validateDob = (dob) => {
 }
 
 export const validateAddressError = (address) => {
+    if (address == null) return false;
     // if (!/^[a-zA-Z0-9]+$/.test(address)) return false;
     return true;
 }

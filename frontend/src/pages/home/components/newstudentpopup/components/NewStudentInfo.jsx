@@ -98,6 +98,7 @@ function NewStudentInfo(props) {
 
     const handleConfirm = () => {
         validate();
+        if(idError || firstNameError || lastNameError || dobError || addressError || highSchoolError || mathScoreError || literatureScoreError || englishScoreError) return;
         // handle add new student api request to backend
         StudentService.createNewStudent(newStudent).then(() => {
             dispatch(updateRefreshState(!stateRefresh));
