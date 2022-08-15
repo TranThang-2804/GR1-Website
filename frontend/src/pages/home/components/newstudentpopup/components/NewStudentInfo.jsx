@@ -5,6 +5,7 @@ import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import StudentService from "../../../../../api/student/StudentService";
 import {useDispatch, useSelector} from "react-redux";
 import {updateRefreshState, updateSelectedStudent} from "../../../../../redux/actions";
+import * as Validator from  "./InputConstraint"
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -57,11 +58,11 @@ function NewStudentInfo(props) {
     const [literatureScore, setLiteratureScore] = React.useState(null);
     const [englishScore, setEnglishScore] = React.useState(null);
 
-    const [idError, setError] = React.useState(false);
+    const [idError, setIdError] = React.useState(false);
     const [firstNameError, setFirstNameError] = React.useState(false);
     const [lastNameError, setLastNameError] = React.useState(false);
     const [dobError, setDobError] = React.useState(false);
-    const [addressError, setAdressError] = React.useState(false);
+    const [addressError, setAddressError] = React.useState(false);
     const [highSchoolError, setHighSchoolError] = React.useState(false);
     const [mathScoreError, setMathScoreError] = React.useState(false);
     const [literatureScoreError, setLiteratureScoreError] = React.useState(false);
@@ -75,6 +76,19 @@ function NewStudentInfo(props) {
 
     const handleOnChange = (event, setFunction) => {
         setFunction(event.target.value);
+        validate();
+    }
+
+    const validate = () => {
+        setIdError(!Validator.validateId(id));
+        setFirstNameError(!Validator.validateFirstName(firstName));
+        setLastNameError(!Validator.validateLastName(lastName));
+        setDobError(!Validator.validateDob(dob));
+        setAddressError(!Validator.validateAddressError(address));
+        setHighSchoolError(!Validator.validateHighSchoolError(highSchool));
+        setMathScoreError(!Validator.validateMathScore(mathScore));
+        setLiteratureScoreError(!Validator.validateLiteratureScore(literatureScore));
+        setEnglishScoreError(!Validator.validateEnglishScore(englishScore));
     }
 
     const handleCancel = () => {
@@ -83,6 +97,7 @@ function NewStudentInfo(props) {
 
 
     const handleConfirm = () => {
+        validate();
         // handle add new student api request to backend
         StudentService.createNewStudent(newStudent).then(() => {
             dispatch(updateRefreshState(!stateRefresh));
