@@ -4,8 +4,8 @@ import TextField from '@mui/material/TextField';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import StudentService from "../../../../../api/student/StudentService";
 import {useDispatch, useSelector} from "react-redux";
-import {updateRefreshState, updateSelectedStudent} from "../../../../../redux/actions";
 import * as Validator from  "./InputConstraint"
+import {updateRefreshState} from "../../../../../redux/actions";
 
 const typoFont = {
   fontFamily: "san-arif",
@@ -19,13 +19,6 @@ const fieldTypoStyle = {
   fontSize: 16,
   fontWeight: "bold"
 }
-
-// const valueTypoStyle = {
-//   ...typoFont,
-//   color: "black",
-//   fontSize: 16,
-//   fontWeight: "medium"
-// }
 
 const textFieldStyle = {
 
@@ -100,12 +93,14 @@ function NewStudentInfo(props) {
         validate();
         if(idError || firstNameError || lastNameError || dobError || addressError || highSchoolError || mathScoreError || literatureScoreError || englishScoreError) return;
         // handle add new student api request to backend
-        StudentService.createNewStudent(newStudent).then(() => {
+        StudentService.createNewStudent(newStudent).then((res) => {
             dispatch(updateRefreshState(!stateRefresh));
-            dispatch(updateSelectedStudent(newStudent));
-            closePopup();
+            if(res.data === `Cannot create student with id = ${id}`){
+              alert(res.data);
+            } else {
+              closePopup();
+            }
         });
-
     }
 
     return(
