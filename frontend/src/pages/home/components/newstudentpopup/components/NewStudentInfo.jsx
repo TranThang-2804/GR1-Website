@@ -69,7 +69,7 @@ function NewStudentInfo(props) {
 
     const handleOnChange = (event, setFunction) => {
         setFunction(event.target.value);
-        validate();
+        // validate();
     }
 
     const validate = () => {
