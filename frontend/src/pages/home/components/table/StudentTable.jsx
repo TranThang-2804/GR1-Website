@@ -18,30 +18,35 @@ import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import {useDispatch, useSelector} from "react-redux";
 import NewStudentPopup from "../newstudentpopup/NewStudentPoppup"
 import {updateSelectedStudent} from "../../../../redux/actions";
+import { useDownloadExcel } from 'react-export-table-to-excel';
 
 const columns = [
-  { id: 'id', label: 'ID', minWidth: 100 },
-  { id: 'name', label: 'Student\u00a0Name', minWidth: 170 },
+  { id: 'id', label: 'ID', minWidth: 100, numeric: true },
+  { id: 'name', label: 'Student\u00a0Name', minWidth: 170, numeric: false },
   {
     id: 'address',
     label: 'Address',
     minWidth: 170,
+    numeric: false,
     format: (value) => value.toLocaleString('en-US')
   },
   {
     id: 'dob',
     label: 'Date\u00a0Of\u00a0Birth',
+    numeric: false,
     minWidth: 100
   },
   {
     id: 'highSchool',
     label: 'School',
     minWidth: 170,
+    numeric: false,
     format: (value) => value.toLocaleString('en-US')
   },
   {
     id: 'finalScore',
     label: 'Final\u00a0Score',
+    numeric: true,
     minWidth: 100
   },
 ];
@@ -53,6 +58,13 @@ export default function StudentTable() {
   const [rows, setRows] = React.useState(studentList);
   const [searched, setSearched] = React.useState("");
   const [open, setOpen] = React.useState(false);
+  const tableRef = React.useRef(null);
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: 'ListOfStudents',
+    sheet: 'Students'
+  })
 
   const stateRefresh = useSelector((state) => state.stateRefresh);
 
@@ -113,7 +125,7 @@ export default function StudentTable() {
       <Grid container direction={{xs: 'column', md: 'row'}}>
         <Grid item xs={1} md={3} container direction='row'>
           <Grid item xs={6} md={12}>
-            <Button sx={{width: {md: '50%', xs: '100%'}, height: {md: '123%', xs: '100%'}}} variant="outlined" endIcon={<PublishRoundedIcon/>}>
+            <Button sx={{width: {md: '50%', xs: '100%'}, height: {md: '123%', xs: '100%'}}} variant="outlined" endIcon={<PublishRoundedIcon/>} onClick={onDownload}>
               Export
             </Button>
           </Grid>
@@ -142,7 +154,7 @@ export default function StudentTable() {
       </Grid>
 
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label="sticky table" ref={tableRef}>
           <TableHead>
             <TableRow>
               {columns.map((column) => (
